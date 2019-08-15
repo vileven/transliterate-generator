@@ -1,0 +1,15 @@
+node_modules/
+.idea/
+.vscode/
+dist/
+npm-debug.log
+*.tgz
+.DS_Store
+storybook-static/
+.awcache
+cache
+src/**/*.js
+package-lock.json
+build/
+!build/index.js
+.rpt2_cache

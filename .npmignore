@@ -1,0 +1,7 @@
+.git
+.editorconfig
+.gitignore
+.idea
+*.tgz
+tslint.*
+.awcache
