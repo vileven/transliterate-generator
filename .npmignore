@@ -5,3 +5,4 @@
 *.tgz
 tslint.*
 .awcache
+.rpt2_cache
