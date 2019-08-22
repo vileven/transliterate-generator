@@ -27,8 +27,10 @@ export const transliterateGenerator = (map: TranslateMap) => (s: string) => {
 			// если не нашлось транслитерации для последовательности символов
 			// просто её не делаем вообще
 			if (!translitArr) {
-				resultMap[initialStr] = (resultMap[initialStr] || [])
-					.concat([initialStr]);
+				if (sequence.length === 1) {
+					resultMap[initialStr] = resultMap[initialStr.slice(0, -1)].map(res => res + sequence);
+				}
+
 				break;
 			}
 
