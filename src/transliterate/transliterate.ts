@@ -1,7 +1,7 @@
 import {TranslateMap} from '../interfaces/TranslateMap';
 import 'core-js/features/array/flat-map';
 
-export const transliterateGenerator = (map: TranslateMap) => (s: string) => {
+export const transliterateGenerator = (map: TranslateMap, maxTranslits: number | null = null) => (s: string) => {
 	// в мапку будут складываться все варианты транслитериции буква за буквой
 	const resultMap: { [key: string]: string[] } = {'': ['']};
 	const maxWidth = Math.max(...Object.keys(map).map(key => key.length));
@@ -39,10 +39,16 @@ export const transliterateGenerator = (map: TranslateMap) => (s: string) => {
 			// спускаться назад в глубину слова.
 			let tempRes = resultMap[s.slice(0, (i - sequence.length + 1))];
 
-			// получаем все варианты замены текущей подстроки
-			tempRes = translitArr.flatMap((translitChar: string) => {
-				return tempRes.map((str) => str + translitChar);
-			});
+			// Если есть ограничение на количество транслитераций и мы зашли за него
+			// больше ничего не преобразовываем.
+			if (maxTranslits !== null && tempRes.length < maxTranslits) {
+				// получаем все варианты замены текущей подстроки
+				tempRes = translitArr.flatMap((translitChar: string) => {
+					return tempRes.map((str) => str + translitChar);
+				});
+			} else {
+				tempRes = tempRes.map((str) => str + sequence);
+			}
 
 			// прибавляем к текущему варианту слова, получившееся транслитерации
 			// для рассматриваемой последовательности
