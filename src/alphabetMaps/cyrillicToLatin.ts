@@ -38,4 +38,4 @@ export default {
 	э: ['eh'],
 	ю: ['u', 'ju', 'yu'],
 	я: ['ja', 'ya', 'y'],
-}
+};
