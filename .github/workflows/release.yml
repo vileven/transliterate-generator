@@ -37,7 +37,7 @@ jobs:
           registry-url: https://registry.npmjs.org
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Run lint
         run: npm run lint
@@ -50,8 +50,20 @@ jobs:
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
 
+      - name: Ensure clean working directory
+        run: |
+          if [[ -n "$(git status --porcelain)" ]]; then
+            echo "There are uncommitted changes. Committing them."
+            git status --short
+            git add -A
+            git commit -m "chore: commit changes before npm publish"
+          else
+            echo "Working directory is clean."
+          fi
+
       - name: Bump version
-        run: npm version ${{ inputs.release_type }} --message "chore: release %s"
+        run: |
+          npm version "${{ inputs.release_type }}" --message "chore: release %s"
 
       - name: Push changes
         run: git push --follow-tags
