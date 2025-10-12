@@ -30,9 +30,7 @@ export const transliterateGenerator =
 				// просто её не делаем вообще
 				if (!translitArr) {
 					if (sequence.length === 1) {
-						resultMap[initialStr] = resultMap[initialStr.slice(0, -1)].map(
-							(res) => res + sequence,
-						);
+						resultMap[initialStr] = resultMap[initialStr.slice(0, -1)].map((res) => res + sequence);
 					}
 
 					break;
