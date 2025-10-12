@@ -3,7 +3,8 @@ import 'core-js/features/array/flat-map';
 
 export const transliterateGenerator = (map: TranslateMap, maxTranslits: number | null = null) => (s: string) => {
 	// в мапку будут складываться все варианты транслитериции буква за буквой
-	const resultMap: { [key: string]: string[] } = {'': ['']};
+	const resultMap: { [key: string]: string[] } = Object.create(null);
+	resultMap[''] = [''];
 	const maxWidth = Math.max(...Object.keys(map).map(key => key.length));
 
 	// цикл по буквам слова
