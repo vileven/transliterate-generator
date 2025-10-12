@@ -12,11 +12,6 @@ on:
           - patch
           - minor
           - major
-      publish:
-        description: Publish the package to npm
-        type: boolean
-        required: true
-        default: false
 
 jobs:
   create-release:
@@ -69,7 +64,6 @@ jobs:
         run: git push --follow-tags
 
       - name: Publish to npm
-        if: inputs.publish == 'true'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm publish --provenance --access public
