@@ -6,6 +6,7 @@
   "scripts": {
     "build": "rollup -c",
     "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
     "format": "prettier --check .",
     "watch": "rollup -cw",
     "prepublishOnly": "npm run build",
