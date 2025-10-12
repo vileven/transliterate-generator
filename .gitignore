@@ -9,7 +9,6 @@ storybook-static/
 .awcache
 cache
 src/**/*.js
-package-lock.json
 build/
 !build/index.js
 .rpt2_cache
